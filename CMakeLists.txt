@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 # set the project name
-project(dashmonkequest) #Modify this to your project name
+project(phrogmonke) #Modify this to your project name
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 20)

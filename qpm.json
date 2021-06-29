@@ -2,8 +2,8 @@
   "sharedDir": "shared",
   "dependenciesDir": "extern",
   "info": {
-    "name": "Dash Monke Quest",
-    "id": "dashmonkequest",
+    "name": "Phrog Monke",
+    "id": "phrogmonke",
     "version": "1.0.0",
     "url": null,
     "additionalData": {}

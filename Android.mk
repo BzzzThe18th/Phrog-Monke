@@ -45,7 +45,7 @@ LOCAL_SRC_FILES := extern/libcustom-types.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := dashmonkequest
+LOCAL_MODULE := phrogmonke
 LOCAL_SRC_FILES += $(call rwildcard,src/,*.cpp)
 LOCAL_SRC_FILES += $(call rwildcard,extern/beatsaber-hook/src/inline-hook,*.cpp)
 LOCAL_SRC_FILES += $(call rwildcard,extern/beatsaber-hook/src/inline-hook,*.c)
@@ -54,7 +54,7 @@ LOCAL_SHARED_LIBRARIES += beatsaber-hook_1_3_5
 LOCAL_SHARED_LIBRARIES += monkecodegen_0_5_0
 LOCAL_SHARED_LIBRARIES += custom-types
 LOCAL_LDLIBS += -llog
-LOCAL_CFLAGS += -I'extern/libil2cpp/il2cpp/libil2cpp' -DID='"dashmonkequest"' -DVERSION='"1.0.0"' -I'./shared' -I'./extern' -isystem'extern/monkecodegen/include'
+LOCAL_CFLAGS += -I'extern/libil2cpp/il2cpp/libil2cpp' -DID='"phrogmonke"' -DVERSION='"1.0.0"' -I'./shared' -I'./extern' -isystem'extern/monkecodegen/include'
 LOCAL_CPPFLAGS += -std=c++2a
 LOCAL_C_INCLUDES += ./include ./src
 include $(BUILD_SHARED_LIBRARY)

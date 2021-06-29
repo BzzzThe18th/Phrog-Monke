@@ -1,0 +1,18 @@
+
+{
+    "_QPVersion": "0.1.1",
+    "name": "Dash Monke Quest",
+    "id": "dashmonkequest",
+    "author": "Buzz Bzzz bzz BZZZ The 18th#0431",
+    "version": "1.0.0",
+    "packageId": "com.AnotherAxiom.GorillaTag",
+    "packageVersion": "1.0.8",
+    "description": "A port of the pc mod dash monke for quest.",
+    "coverImage": "coverImage.png",
+    "modFiles": [
+        "libdashmonkequest.so"
+    ],
+    "libraryFiles": [
+        "libbeatsaber-hook_1_3_5.so"
+    ]
+}

@@ -4,7 +4,7 @@
   "info": {
     "name": "Phrog Monke",
     "id": "phrogmonke",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "url": null,
     "additionalData": {}
   },
@@ -19,12 +19,12 @@
       }
     },
     {
-      "id": "monkecodegen",
+      "id": "custom-types",
       "versionRange": "*",
       "additionalData": {}
     },
     {
-      "id": "custom-types",
+      "id": "monkecodegen",
       "versionRange": "*",
       "additionalData": {}
     }

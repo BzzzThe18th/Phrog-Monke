@@ -41,7 +41,7 @@ Logger& getLogger()
 
 bool isRoom = false;
 bool fist = false;
-bool dashModeEnabled = false;
+bool phrogModeEnabled = false;
 float thrust = 45000.0F;
 bool recharged = false;
 
@@ -120,7 +120,7 @@ void UpdateButton()
     MAKE_HOOK_OFFSETLESS(GorillaTagManager_Update, void, GlobalNamespace::GorillaTagManager* self) {
 
         if(!isRoom) {
-            dashModeEnabled = false; return;
+            phrogModeEnabled = false; return;
         }
 
         using namespace GlobalNamespace;
@@ -146,17 +146,16 @@ void UpdateButton()
         Vector3 lookingAt = velocityForward;
 
         Transform* rightHandT = player->rightHandTransform;
-
         if(isRoom) {
             if(recharged) {
                 if(fist) {
-                    if(dashModeEnabled) {
-                        dashModeEnabled = false;
+                    if(phrogModeEnabled) {
+                        phrogModeEnabled = false;
                         playerPhysics->set_useGravity(false);
                         playerPhysics->AddForce(rightHandT->get_forward() * thrust);
                         recharged = false;
-                    } else if(!dashModeEnabled){
-                        dashModeEnabled = true;
+                    } else if(!phrogModeEnabled){
+                        phrogModeEnabled = true;
                     }
                 }
             } else if(!recharged) {

@@ -1,7 +1,3 @@
-# Dash Monke Quest
-
-A port of the pc mod dash monke for quest.
-
-## Credits
-
-* Buzz Bzzz bzz BZZZ The 18th#0431 - me
+# Phrog Monke
+Become phrog.
+Put your left hand on the ground, aim with your right and click the right thumbstick to leap to the air.

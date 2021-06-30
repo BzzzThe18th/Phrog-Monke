@@ -5,7 +5,7 @@
     "info": {
       "name": "Phrog Monke",
       "id": "phrogmonke",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "url": null,
       "additionalData": {}
     },
@@ -20,12 +20,12 @@
         }
       },
       {
-        "id": "monkecodegen",
+        "id": "custom-types",
         "versionRange": "*",
         "additionalData": {}
       },
       {
-        "id": "custom-types",
+        "id": "monkecodegen",
         "versionRange": "*",
         "additionalData": {}
       }
@@ -48,7 +48,7 @@
     {
       "dependency": {
         "id": "modloader",
-        "versionRange": "^1.0.0",
+        "versionRange": "^1.0.1",
         "additionalData": {}
       },
       "version": "1.1.0"
@@ -63,19 +63,63 @@
     },
     {
       "dependency": {
-        "id": "monkecodegen",
-        "versionRange": "*",
-        "additionalData": {}
-      },
-      "version": "0.5.0"
-    },
-    {
-      "dependency": {
         "id": "custom-types",
         "versionRange": "*",
         "additionalData": {}
       },
       "version": "0.11.1"
+    },
+    {
+      "dependency": {
+        "id": "monkecodegen",
+        "versionRange": "*",
+        "additionalData": {}
+      },
+      "version": "0.6.0"
+    },
+    {
+      "dependency": {
+        "id": "monkecomputer",
+        "versionRange": "*",
+        "additionalData": {}
+      },
+      "version": "1.5.1"
+    },
+    {
+      "dependency": {
+        "id": "beatsaber-hook",
+        "versionRange": "^1.1.0",
+        "additionalData": {
+          "extraFiles": [
+            "src/inline-hook"
+          ]
+        }
+      },
+      "version": "1.3.3"
+    },
+    {
+      "dependency": {
+        "id": "quest-cosmetic-loader",
+        "versionRange": "*",
+        "additionalData": {}
+      },
+      "version": "0.1.4"
+    },
+    {
+      "dependency": {
+        "id": "zip",
+        "versionRange": "*",
+        "additionalData": {}
+      },
+      "version": "1.7.4"
+    },
+    {
+      "dependency": {
+        "id": "monkecodegen",
+        "versionRange": "*",
+        "additionalData": {}
+      },
+      "version": "0.5.0"
     }
   ]
 }

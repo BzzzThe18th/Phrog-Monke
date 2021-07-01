@@ -6,7 +6,7 @@
     "author": "Buzz Bzzz bzz BZZZ The 18th#0431",
     "version": "1.0.1",
     "packageId": "com.AnotherAxiom.GorillaTag",
-    "packageVersion": "1.0.8",
+    "packageVersion": "1.0.9",
     "description": "Hop about like a frog ^w^.",
     "coverImage": "coverImage.jpg",
     "modFiles": [
@@ -14,5 +14,17 @@
     ],
     "libraryFiles": [
         "libbeatsaber-hook_1_3_5.so"
+    ],
+    "dependencies": [
+        {
+            "id": "monkecodegen",
+            "version": ">=0.6.0",
+            "downloadIfMissing": "https://github.com/RedBrumbler/Monkecodegen/releases/latest/download/MonkeCodegen.qmod"
+        },
+        {
+            "id": "MonkeComputer",
+            "version": ">=1.5.2",
+            "downloadIfMissing": "https://github.com/RedBrumbler/MonkeComputer/releases/latest/download/MonkeComputer.qmod"
+        }
     ]
 }

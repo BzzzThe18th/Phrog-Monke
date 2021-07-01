@@ -20,11 +20,6 @@
         }
       },
       {
-        "id": "custom-types",
-        "versionRange": "*",
-        "additionalData": {}
-      },
-      {
         "id": "monkecodegen",
         "versionRange": "*",
         "additionalData": {}

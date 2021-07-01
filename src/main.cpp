@@ -1,6 +1,5 @@
 #include <thread>
 #include "modloader/shared/modloader.hpp"
-#include "custom-types/shared/register.hpp"
 #include "GorillaLocomotion/Player.hpp"
 #include "beatsaber-hook/shared/utils/logging.hpp"
 #include "beatsaber-hook/shared/utils/il2cpp-utils.hpp"
@@ -47,6 +46,8 @@ bool recharged = false;
 
 MAKE_HOOK_OFFSETLESS(PhotonNetworkController_OnJoinedRoom, void, Il2CppObject* self)
 {
+    INFO("Checking if private BUZZ");
+    
     PhotonNetworkController_OnJoinedRoom(self);
 
     Il2CppObject* currentRoom = CRASH_UNLESS(il2cpp_utils::RunMethod("Photon.Pun", "PhotonNetwork", "get_CurrentRoom"));
@@ -56,47 +57,25 @@ MAKE_HOOK_OFFSETLESS(PhotonNetworkController_OnJoinedRoom, void, Il2CppObject* s
         isRoom = !CRASH_UNLESS(il2cpp_utils::RunMethod<bool>(currentRoom, "get_IsVisible"));
     }
     else isRoom = true;
-
+    
 }
 
 void UpdateButton()
 {
-    if(!isRoom) {
-        fist = false; return;
-    }
+    INFO("Checking for right thumbstick press");
 
     using namespace GlobalNamespace;
-    bool AInput = false;
-	bool BInput = false;
-	bool XInput = false;
-    bool YInput = false;
-	bool startInput = false;
-    bool leftGripInput = false;
-    bool rightGripInput = false;
-    bool leftTriggerInput = false;
-    bool rightTriggerInput = false;
     bool rightThumbstick = false;
-	//Remove whatever inputs you dont need
-    AInput = OVRInput::Get(OVRInput::Button::One, OVRInput::Controller::RTouch);
-    BInput = OVRInput::Get(OVRInput::Button::Two, OVRInput::Controller::RTouch);
-    XInput = OVRInput::Get(OVRInput::Button::One, OVRInput::Controller::LTouch);
-    YInput = OVRInput::Get(OVRInput::Button::Two, OVRInput::Controller::LTouch);
-    startInput = OVRInput::Get(OVRInput::Button::Start, OVRInput::Controller::LTouch);
-    leftGripInput = OVRInput::Get(OVRInput::Button::PrimaryHandTrigger, OVRInput::Controller::LTouch);
-    rightGripInput = OVRInput::Get(OVRInput::Button::PrimaryHandTrigger, OVRInput::Controller::RTouch);
-    leftTriggerInput = OVRInput::Get(OVRInput::Button::PrimaryIndexTrigger, OVRInput::Controller::LTouch);
-    rightTriggerInput = OVRInput::Get(OVRInput::Button::PrimaryIndexTrigger, OVRInput::Controller::RTouch);
+
     rightThumbstick = OVRInput::Get(OVRInput::Button::PrimaryThumbstick, OVRInput::Controller::RTouch);
 
     if (isRoom)
     {
-        // If you want just a single button press then do if (AInput) replace AInput with whatever button you want
         if (rightThumbstick)
         {
             INFO("Dash on");
             fist = true;
         }
-        // For checking if a specific button is not being pressed then do if (!AInput)
         else
         {
             INFO("Dash off");
@@ -108,20 +87,18 @@ void UpdateButton()
 
     #include "GlobalNamespace/GorillaTagManager.hpp"
 
-    MAKE_HOOK_OFFSETLESS(Player_GetSlidePercentage, /*this is the check for hands touching ground*/  float, Il2CppObject* self, RaycastHit raycastHit) {
+    MAKE_HOOK_OFFSETLESS(Player_GetSlidePercentage, float, Il2CppObject* self, RaycastHit raycastHit) {
+        INFO("Checking for hands on surface BUZZ");
 
         if(isRoom && !recharged) {
             recharged = true;
         }
 
         return Player_GetSlidePercentage(self, raycastHit);
-    }//this is the code in which it only activates when you are touching the ground, but i cant get it to function properly, for instance when you're in the air, itll still be active
+    }
 
     MAKE_HOOK_OFFSETLESS(GorillaTagManager_Update, void, GlobalNamespace::GorillaTagManager* self) {
-
-        if(!isRoom) {
-            phrogModeEnabled = false; return;
-        }
+        INFO("Running GTManager hook BUZZ");
 
         using namespace GlobalNamespace;
         using namespace GorillaLocomotion;
@@ -137,22 +114,18 @@ void UpdateButton()
         GameObject* playerGameObject = playerPhysics->get_gameObject();
         if(playerGameObject == nullptr) return;
 
-        Transform* turnParent = playerGameObject->get_transform()->GetChild(0);
-
-        Transform* mainCamera = turnParent->GetChild(0);
-
-        Vector3 velocityForward = mainCamera->get_forward();
-
-        Vector3 lookingAt = velocityForward;
-
         Transform* rightHandT = player->rightHandTransform;
         if(isRoom) {
+            INFO("In private room BUZZ");
             if(recharged) {
+                INFO("Is recharged BUZZ");
                 if(fist) {
+                    INFO("Clicking thumbstick BUZZ");
                     if(phrogModeEnabled) {
                         phrogModeEnabled = false;
                         playerPhysics->set_useGravity(false);
                         playerPhysics->AddForce(rightHandT->get_forward() * thrust);
+                        INFO("Attempted leap BUZZ");
                         recharged = false;
                     } else if(!phrogModeEnabled){
                         phrogModeEnabled = true;
@@ -171,6 +144,8 @@ MAKE_HOOK_OFFSETLESS(Player_Update, void, Il2CppObject* self)
     INFO("player update was called");
     Player_Update(self);
     UpdateButton();
+    OVRInput::Update();
+    OVRInput::FixedUpdate();
 }
 
 extern "C" void setup(ModInfo& info)
@@ -183,12 +158,12 @@ extern "C" void setup(ModInfo& info)
 
 extern "C" void load()
 {
-    getLogger().info("Loading mod...");
+    getLogger().info("Loading phrog monke BUZZ...");
 
     INSTALL_HOOK_OFFSETLESS(getLogger(), Player_GetSlidePercentage, il2cpp_utils::FindMethodUnsafe("GorillaLocomotion", "Player", "GetSlidePercentage", 1));
     INSTALL_HOOK_OFFSETLESS(getLogger(), PhotonNetworkController_OnJoinedRoom, il2cpp_utils::FindMethodUnsafe("", "PhotonNetworkController", "OnJoinedRoom", 0));
 	INSTALL_HOOK_OFFSETLESS(getLogger(), Player_Update, il2cpp_utils::FindMethodUnsafe("GorillaLocomotion", "Player", "Update", 0));
     INSTALL_HOOK_OFFSETLESS(getLogger(), GorillaTagManager_Update, il2cpp_utils::FindMethodUnsafe("", "GorillaTagManager", "Update", 0));
 
-    getLogger().info("Mod loaded!");
+    getLogger().info("Phrog monke loaded BUZZ!");
 }

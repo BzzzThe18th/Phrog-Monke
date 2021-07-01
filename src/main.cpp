@@ -22,6 +22,11 @@
 #include "UnityEngine/GameObject.hpp"
 #include "UnityEngine/RaycastHit.hpp"
 #include "UnityEngine/XR/InputDevice.hpp"
+#include "PhrogMonkeWatchView.hpp"
+#include "config.hpp"
+#include "monkecomputer/shared/GorillaUI.hpp"
+#include "monkecomputer/shared/Register.hpp"
+#include "custom-types/shared/register.hpp"
 
 ModInfo modInfo;
 
@@ -58,6 +63,11 @@ MAKE_HOOK_OFFSETLESS(PhotonNetworkController_OnJoinedRoom, void, Il2CppObject* s
     }
     else isRoom = true;
     
+    if(!isRoom) {
+        recharged = false;
+        fist = false;
+        phrogModeEnabled = false;
+    }
 }
 
 void UpdateButton()
@@ -69,7 +79,7 @@ void UpdateButton()
 
     rightThumbstick = OVRInput::Get(OVRInput::Button::PrimaryThumbstick, OVRInput::Controller::RTouch);
 
-    if (isRoom)
+    if (isRoom && config.enabled)
     {
         if (rightThumbstick)
         {
@@ -90,7 +100,7 @@ void UpdateButton()
     MAKE_HOOK_OFFSETLESS(Player_GetSlidePercentage, float, Il2CppObject* self, RaycastHit raycastHit) {
         INFO("Checking for hands on surface BUZZ");
 
-        if(isRoom && !recharged) {
+        if(isRoom && !recharged && config.enabled) {
             recharged = true;
         }
 
@@ -115,7 +125,7 @@ void UpdateButton()
         if(playerGameObject == nullptr) return;
 
         Transform* rightHandT = player->rightHandTransform;
-        if(isRoom) {
+        if(isRoom && config.enabled) {
             INFO("In private room BUZZ");
             if(recharged) {
                 INFO("Is recharged BUZZ");
@@ -124,7 +134,7 @@ void UpdateButton()
                     if(phrogModeEnabled) {
                         phrogModeEnabled = false;
                         playerPhysics->set_useGravity(false);
-                        playerPhysics->AddForce(rightHandT->get_forward() * thrust);
+                        playerPhysics->AddForce(rightHandT->get_forward() * config.multiplier);
                         INFO("Attempted leap BUZZ");
                         recharged = false;
                     } else if(!phrogModeEnabled){
@@ -134,6 +144,8 @@ void UpdateButton()
             } else if(!recharged) {
                 playerPhysics->set_useGravity(true);
             }
+        } else {
+            playerPhysics->set_useGravity(true);
         }
     }
 
@@ -160,10 +172,15 @@ extern "C" void load()
 {
     getLogger().info("Loading phrog monke BUZZ...");
 
+    GorillaUI::Init();
+
     INSTALL_HOOK_OFFSETLESS(getLogger(), Player_GetSlidePercentage, il2cpp_utils::FindMethodUnsafe("GorillaLocomotion", "Player", "GetSlidePercentage", 1));
     INSTALL_HOOK_OFFSETLESS(getLogger(), PhotonNetworkController_OnJoinedRoom, il2cpp_utils::FindMethodUnsafe("", "PhotonNetworkController", "OnJoinedRoom", 0));
 	INSTALL_HOOK_OFFSETLESS(getLogger(), Player_Update, il2cpp_utils::FindMethodUnsafe("GorillaLocomotion", "Player", "Update", 0));
     INSTALL_HOOK_OFFSETLESS(getLogger(), GorillaTagManager_Update, il2cpp_utils::FindMethodUnsafe("", "GorillaTagManager", "Update", 0));
+
+    custom_types::Register::RegisterType<PhrogMonke::PhrogMonkeWatchView>(); 
+    GorillaUI::Register::RegisterWatchView<PhrogMonke::PhrogMonkeWatchView*>("Phrog Monke", VERSION);
 
     getLogger().info("Phrog monke loaded BUZZ!");
 }

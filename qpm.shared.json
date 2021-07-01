@@ -23,6 +23,16 @@
         "id": "monkecodegen",
         "versionRange": "*",
         "additionalData": {}
+      },
+      {
+        "id": "monkecomputer",
+        "versionRange": "*",
+        "additionalData": {}
+      },
+      {
+        "id": "custom-types",
+        "versionRange": "*",
+        "additionalData": {}
       }
     ],
     "additionalData": {}
@@ -43,7 +53,7 @@
     {
       "dependency": {
         "id": "modloader",
-        "versionRange": "^1.0.1",
+        "versionRange": "^1.0.0",
         "additionalData": {}
       },
       "version": "1.1.0"
@@ -55,14 +65,6 @@
         "additionalData": {}
       },
       "version": "0.2.1"
-    },
-    {
-      "dependency": {
-        "id": "custom-types",
-        "versionRange": "*",
-        "additionalData": {}
-      },
-      "version": "0.11.1"
     },
     {
       "dependency": {
@@ -78,7 +80,15 @@
         "versionRange": "*",
         "additionalData": {}
       },
-      "version": "1.5.1"
+      "version": "1.5.2"
+    },
+    {
+      "dependency": {
+        "id": "custom-types",
+        "versionRange": "^0.8.3",
+        "additionalData": {}
+      },
+      "version": "0.8.3"
     },
     {
       "dependency": {
@@ -110,11 +120,11 @@
     },
     {
       "dependency": {
-        "id": "monkecodegen",
+        "id": "gorilla-utils",
         "versionRange": "*",
         "additionalData": {}
       },
-      "version": "0.5.0"
+      "version": "0.1.5"
     }
   ]
 }

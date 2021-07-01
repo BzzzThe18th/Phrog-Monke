@@ -22,6 +22,16 @@
       "id": "monkecodegen",
       "versionRange": "*",
       "additionalData": {}
+    },
+    {
+      "id": "monkecomputer",
+      "versionRange": "*",
+      "additionalData": {}
+    },
+    {
+      "id": "custom-types",
+      "versionRange": "0.8.3",
+      "additionalData": {}
     }
   ],
   "additionalData": {}

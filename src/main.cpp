@@ -46,7 +46,7 @@ Logger& getLogger()
 bool isRoom = false;
 bool fist = false;
 bool phrogModeEnabled = false;
-float thrust = 45000.0F;
+float thrust = config.power * 45000;
 bool recharged = false;
 
 MAKE_HOOK_OFFSETLESS(PhotonNetworkController_OnJoinedRoom, void, Il2CppObject* self)
@@ -108,10 +108,10 @@ void UpdateButton()
     }
 
     MAKE_HOOK_OFFSETLESS(GorillaTagManager_Update, void, GlobalNamespace::GorillaTagManager* self) {
-        INFO("Running GTManager hook BUZZ");
-
         using namespace GlobalNamespace;
         using namespace GorillaLocomotion;
+        GorillaTagManager_Update(self);
+        INFO("Running GTManager hook BUZZ");
 
         Player* playerInstance = Player::get_Instance();
         if(playerInstance == nullptr) return;
@@ -134,7 +134,7 @@ void UpdateButton()
                     if(phrogModeEnabled) {
                         phrogModeEnabled = false;
                         playerPhysics->set_useGravity(false);
-                        playerPhysics->AddForce(rightHandT->get_forward() * config.multiplier);
+                        playerPhysics->AddForce(rightHandT->get_forward() * thrust);
                         INFO("Attempted leap BUZZ");
                         recharged = false;
                     } else if(!phrogModeEnabled){
@@ -156,8 +156,6 @@ MAKE_HOOK_OFFSETLESS(Player_Update, void, Il2CppObject* self)
     INFO("player update was called");
     Player_Update(self);
     UpdateButton();
-    OVRInput::Update();
-    OVRInput::FixedUpdate();
 }
 
 extern "C" void setup(ModInfo& info)

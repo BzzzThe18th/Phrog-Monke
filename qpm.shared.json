@@ -5,7 +5,7 @@
     "info": {
       "name": "Phrog Monke",
       "id": "phrogmonke",
-      "version": "1.0.1",
+      "version": "1.2.1",
       "url": null,
       "additionalData": {}
     },
@@ -56,7 +56,7 @@
         "versionRange": "^1.0.0",
         "additionalData": {}
       },
-      "version": "1.1.0"
+      "version": "1.2.0"
     },
     {
       "dependency": {

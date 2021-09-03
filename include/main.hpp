@@ -21,5 +21,4 @@
 #include "beatsaber-hook/shared/utils/typedefs.h"
 #include "beatsaber-hook/shared/utils/utils.h
 
-Configuration& getConfig();
 Logger& getLogger();

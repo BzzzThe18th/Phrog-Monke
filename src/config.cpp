@@ -24,7 +24,6 @@ void SaveConfig()
     getConfig().config.SetObject();
     rapidjson::Document::AllocatorType& allocator = getConfig().config.GetAllocator();
 
-    getConfig().config.AddMember("power", config.power, allocator);
     getConfig().config.AddMember("enabled", config.enabled, allocator);
     getConfig().Write();
     INFO("Saved Configuration!");
@@ -35,13 +34,6 @@ bool LoadConfig()
     INFO("Loading config...");
     bool foundEverything = true;
     rapidjson::Document& doc = getConfig().config;
-    if(doc.HasMember("power") && doc["power"].IsDouble()) {
-        config.power = doc["power"].GetDouble();
-    }else if (doc.HasMember("power") && doc["power"].IsInt()) {
-        config.power = (double)doc["power"].GetInt();
-    } else {
-        foundEverything = false;
-    }
     if(doc.HasMember("enabled") && doc["enabled"].IsBool()) {
         config.enabled = doc["enabled"].GetBool();
     } else {

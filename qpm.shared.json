@@ -48,15 +48,39 @@
           ]
         }
       },
-      "version": "1.3.5"
+      "version": "2.3.0"
     },
     {
       "dependency": {
         "id": "modloader",
-        "versionRange": "^1.0.0",
+        "versionRange": "^1.2.0",
         "additionalData": {}
       },
-      "version": "1.2.0"
+      "version": "1.2.3"
+    },
+    {
+      "dependency": {
+        "id": "libil2cpp",
+        "versionRange": ">=0.1.2<0.3.0",
+        "additionalData": {}
+      },
+      "version": "0.2.2"
+    },
+    {
+      "dependency": {
+        "id": "monkecodegen",
+        "versionRange": "*",
+        "additionalData": {}
+      },
+      "version": "0.8.0"
+    },
+    {
+      "dependency": {
+        "id": "beatsaber-hook",
+        "versionRange": "^2.0.0",
+        "additionalData": {}
+      },
+      "version": "2.2.5"
     },
     {
       "dependency": {
@@ -68,39 +92,31 @@
     },
     {
       "dependency": {
-        "id": "monkecodegen",
-        "versionRange": "*",
-        "additionalData": {}
-      },
-      "version": "0.6.0"
-    },
-    {
-      "dependency": {
         "id": "monkecomputer",
         "versionRange": "*",
         "additionalData": {}
       },
-      "version": "1.5.2"
+      "version": "1.6.1"
     },
     {
       "dependency": {
         "id": "custom-types",
-        "versionRange": "^0.8.3",
+        "versionRange": "*",
         "additionalData": {}
       },
-      "version": "0.8.3"
+      "version": "0.12.7"
     },
     {
       "dependency": {
         "id": "beatsaber-hook",
-        "versionRange": "^1.1.0",
+        "versionRange": "^2.0.0",
         "additionalData": {
           "extraFiles": [
             "src/inline-hook"
           ]
         }
       },
-      "version": "1.3.3"
+      "version": "2.2.4"
     },
     {
       "dependency": {
@@ -108,7 +124,7 @@
         "versionRange": "*",
         "additionalData": {}
       },
-      "version": "0.1.4"
+      "version": "0.2.2"
     },
     {
       "dependency": {
@@ -124,7 +140,7 @@
         "versionRange": "*",
         "additionalData": {}
       },
-      "version": "0.1.5"
+      "version": "0.2.3"
     }
   ]
 }

@@ -3,9 +3,8 @@
 #include "config.hpp"
 #include "monkecomputer/shared/ViewLib/MonkeWatch.hpp"
 #include "beatsaber-hook/shared/utils/il2cpp-functions.hpp"
-#include "UnityEngine/Vector3.hpp"
 
-DEFINE_TYPE(PhrogMonke::PhrogMonkeWatchView);
+DEFINE_TYPE(PhrogMonke, PhrogMonkeWatchView);
 
 using namespace GorillaUI;
 using namespace UnityEngine;
